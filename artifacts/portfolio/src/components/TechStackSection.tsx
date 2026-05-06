@@ -12,23 +12,20 @@ export default function TechStackSection() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        headingRef.current,
-        { y: 40, opacity: 0 },
-        {
-          y: 0, opacity: 1, duration: 0.8, ease: "power3.out",
-          scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
-        }
-      );
+      gsap.from(headingRef.current, {
+        y: 40,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
+      });
 
-      gsap.fromTo(
-        cardsRef.current?.children ?? [],
-        { y: 40, opacity: 0 },
-        {
-          y: 0, opacity: 1, duration: 0.6, stagger: 0.12, ease: "power3.out",
-          scrollTrigger: { trigger: sectionRef.current, start: "top 75%" },
-        }
-      );
+      gsap.from(cardsRef.current?.children ?? [], {
+        y: 40,
+        duration: 0.6,
+        stagger: 0.12,
+        ease: "power3.out",
+        scrollTrigger: { trigger: sectionRef.current, start: "top 75%" },
+      });
     }, sectionRef);
 
     return () => ctx.revert();

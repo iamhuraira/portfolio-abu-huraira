@@ -28,12 +28,37 @@
   ],
   "about": {
     "heading": "About Me",
-    "paragraphs": [
-      "I'm a passionate Frontend Developer with a keen eye for design and a love for creating seamless user experiences. Based in Dhaka, Bangladesh, I've been crafting web applications for over 3 years.",
-      "My journey into web development started with curiosity and has grown into a full-fledged career. I thrive on transforming complex problems into elegant, intuitive interfaces.",
-      "When I'm not coding, I enjoy exploring new technologies, contributing to open-source projects, and staying up-to-date with the latest trends in web development."
+    "bio": "Frontend Developer with 1+ year of experience building responsive and scalable web applications using React and Next.js. Skilled in turning UI/UX designs into pixel-perfect, high-performing code, with a strong focus on clean architecture, performance optimization, and modern frontend practices.",
+    "profile": {
+      "photo": "/profile.png",
+      "name": "Md. Nuruzzaman",
+      "tagline": "Frontend Developer (React.js & Next.js) | Creating High-Performance, Modern Web Applications",
+      "resumeUrl": "#"
+    },
+    "education": [
+      {
+        "degree": "Bachelor of Arts (BA) in English",
+        "institution": "National University",
+        "period": "2023 - 2027 (Expected)"
+      },
+      {
+        "degree": "Higher Secondary Certificate (HSC)",
+        "institution": "Govt. Bangabandhu College",
+        "period": "2020 - 2022"
+      }
     ],
-    "image": null
+    "experience": [
+      {
+        "role": "Full Stack Developer",
+        "company": "Sparktech Agency",
+        "period": "October 2025 - Present"
+      },
+      {
+        "role": "Frontend Developer (Remote)",
+        "company": "Bhuiyan Tourism",
+        "period": "April 2024 - September 2025"
+      }
+    ]
   },
   "techStack": {
     "heading": "Tech Stack",

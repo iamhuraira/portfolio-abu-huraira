@@ -14,23 +14,20 @@ export default function ProjectsSection() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        headingRef.current,
-        { y: 40, opacity: 0 },
-        {
-          y: 0, opacity: 1, duration: 0.8, ease: "power3.out",
-          scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
-        }
-      );
+      gsap.from(headingRef.current, {
+        y: 40,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
+      });
 
-      gsap.fromTo(
-        gridRef.current?.children ?? [],
-        { y: 50, opacity: 0 },
-        {
-          y: 0, opacity: 1, duration: 0.7, stagger: 0.12, ease: "power3.out",
-          scrollTrigger: { trigger: sectionRef.current, start: "top 72%" },
-        }
-      );
+      gsap.from(gridRef.current?.children ?? [], {
+        y: 50,
+        duration: 0.7,
+        stagger: 0.12,
+        ease: "power3.out",
+        scrollTrigger: { trigger: sectionRef.current, start: "top 72%" },
+      });
     }, sectionRef);
 
     return () => ctx.revert();

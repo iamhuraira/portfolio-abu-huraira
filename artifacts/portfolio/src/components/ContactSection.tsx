@@ -17,23 +17,20 @@ export default function ContactSection() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        headingRef.current,
-        { y: 40, opacity: 0 },
-        {
-          y: 0, opacity: 1, duration: 0.8, ease: "power3.out",
-          scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
-        }
-      );
+      gsap.from(headingRef.current, {
+        y: 40,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
+      });
 
-      gsap.fromTo(
-        [infoRef.current, formRef.current],
-        { y: 40, opacity: 0 },
-        {
-          y: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: "power3.out",
-          scrollTrigger: { trigger: sectionRef.current, start: "top 72%" },
-        }
-      );
+      gsap.from([infoRef.current, formRef.current], {
+        y: 40,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: { trigger: sectionRef.current, start: "top 72%" },
+      });
     }, sectionRef);
 
     return () => ctx.revert();
