@@ -102,7 +102,7 @@ export default function HeroSection() {
           );
         },
       });
-    }, 2800);
+    }, 4500);
 
     return () => clearInterval(interval);
   }, [phrases.length]);
