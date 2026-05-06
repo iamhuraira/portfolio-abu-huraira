@@ -84,43 +84,66 @@
   },
   "projects": {
     "heading": "Projects",
-    "subtitle": "Some of my recent work",
+    "subtitle": "Explore some of the personal and team-based projects I have built showcasing my skills and expertise.",
     "items": [
       {
         "id": 1,
-        "title": "Portfolio Website",
-        "description": "A personal portfolio built with Next.js, GSAP animations, and Tailwind CSS showcasing my work and skills.",
-        "tags": ["Next.js", "GSAP", "Tailwind"],
-        "liveUrl": "#",
-        "githubUrl": "#",
-        "gradient": "from-blue-500 to-purple-600"
+        "title": "NextTrade",
+        "type": "Team Project",
+        "typeColor": "text-blue-400",
+        "description": "An online trading platform providing live market data, interactive charts, user portfolios, and secure buy/sell functionality for stocks and cryptocurrencies.",
+        "preview": "/projects/nextrade.png",
+        "techStack": [
+          { "name": "Next.js", "color": "#888888" },
+          { "name": "Tailwind CSS", "color": "#38bdf8" },
+          { "name": "Node.js", "color": "#6dbf67" },
+          { "name": "Express.js", "color": "#aaaaaa" },
+          { "name": "MongoDB", "color": "#4db33d" },
+          { "name": "Socket.IO", "color": "#cccccc" },
+          { "name": "Firebase", "color": "#f5a623" }
+        ],
+        "githubClientUrl": "#",
+        "githubServerUrl": "#",
+        "liveUrl": "#"
       },
       {
         "id": 2,
-        "title": "E-Commerce Dashboard",
-        "description": "A full-featured e-commerce admin panel with real-time analytics, inventory management, and order tracking.",
-        "tags": ["React", "TypeScript", "Recharts"],
-        "liveUrl": "#",
-        "githubUrl": "#",
-        "gradient": "from-pink-500 to-orange-500"
+        "title": "Invento Wave",
+        "type": "Personal Project",
+        "typeColor": "text-orange-400",
+        "description": "A web-based system to manage inventory, suppliers, sales, and stock reports with role-based access and real-time updates.",
+        "preview": "/projects/invento-wave.png",
+        "techStack": [
+          { "name": "React.js", "color": "#61dafb" },
+          { "name": "Tailwind CSS", "color": "#38bdf8" },
+          { "name": "Node.js", "color": "#6dbf67" },
+          { "name": "Express.js", "color": "#aaaaaa" },
+          { "name": "MongoDB", "color": "#4db33d" },
+          { "name": "Firebase", "color": "#f5a623" },
+          { "name": "Stripe", "color": "#7c5cfc" }
+        ],
+        "githubClientUrl": "#",
+        "githubServerUrl": "#",
+        "liveUrl": "#"
       },
       {
         "id": 3,
-        "title": "Task Management App",
-        "description": "A Kanban-style task manager with drag-and-drop, real-time updates, and team collaboration features.",
-        "tags": ["React", "Node.js", "PostgreSQL"],
-        "liveUrl": "#",
-        "githubUrl": "#",
-        "gradient": "from-teal-400 to-blue-500"
-      },
-      {
-        "id": 4,
-        "title": "Weather Application",
-        "description": "A beautiful weather app with animated backgrounds, location detection, and 7-day forecasts.",
-        "tags": ["JavaScript", "OpenWeather API", "CSS3"],
-        "liveUrl": "#",
-        "githubUrl": "#",
-        "gradient": "from-purple-500 to-pink-500"
+        "title": "Library Hub",
+        "type": "Personal Project",
+        "typeColor": "text-orange-400",
+        "description": "A web application to manage library operations including book cataloging, member registration, borrowing/return tracking, and overdue fine management.",
+        "preview": "/projects/library-hub.png",
+        "techStack": [
+          { "name": "React.js", "color": "#61dafb" },
+          { "name": "Tailwind CSS", "color": "#38bdf8" },
+          { "name": "Node.js", "color": "#6dbf67" },
+          { "name": "Express.js", "color": "#aaaaaa" },
+          { "name": "MongoDB", "color": "#4db33d" },
+          { "name": "Firebase", "color": "#f5a623" }
+        ],
+        "githubClientUrl": "#",
+        "githubServerUrl": "#",
+        "liveUrl": "#"
       }
     ]
   },
