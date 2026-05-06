@@ -12,12 +12,6 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; className?: s
   FaDiscord,
 };
 
-const gradientStyles = [
-  { backgroundImage: "linear-gradient(135deg, #3b82f6, #a855f7)" },
-  { backgroundImage: "linear-gradient(135deg, #ec4899, #f97316)" },
-  { backgroundImage: "linear-gradient(135deg, #f472b6, #ef4444)" },
-];
-
 export default function HeroSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const adjectiveRef = useRef<HTMLSpanElement>(null);
@@ -79,18 +73,18 @@ export default function HeroSection() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (!adjectiveRef.current || !developerRef.current) return;
+      if (!adjectiveRef.current) return;
 
-      gsap.to([adjectiveRef.current, developerRef.current], {
+      gsap.to(adjectiveRef.current, {
         opacity: 0,
         y: -12,
-        duration: 0.35,
+        duration: 0.3,
         ease: "power2.in",
         onComplete: () => {
           setCurrentIndex((prev) => (prev + 1) % phrases.length);
           gsap.fromTo(
-            [adjectiveRef.current, developerRef.current],
-            { opacity: 0, y: 14 },
+            adjectiveRef.current,
+            { opacity: 0, y: 16 },
             { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }
           );
         },
@@ -99,8 +93,6 @@ export default function HeroSection() {
 
     return () => clearInterval(interval);
   }, [phrases.length]);
-
-  const currentGradient = gradientStyles[currentIndex] ?? gradientStyles[0];
 
   return (
     <section
@@ -144,7 +136,7 @@ export default function HeroSection() {
             ref={developerRef}
             className="block"
             style={{
-              ...currentGradient,
+              backgroundImage: "linear-gradient(135deg, #3b82f6, #a855f7)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
