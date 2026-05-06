@@ -1,45 +1,58 @@
-# [Project name]
+# Portfolio — mn.dev
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+A personal portfolio website with GSAP animations, dark theme, and rotating hero text, built for Md. Nuruzzaman.
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
+- `pnpm --filter @workspace/portfolio run dev` — run portfolio (port auto-assigned via `PORT` env)
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
+- No database or backend required — portfolio is frontend-only
 
 ## Stack
 
 - pnpm workspaces, Node.js 24, TypeScript 5.9
-- API: Express 5
-- DB: PostgreSQL + Drizzle ORM
-- Validation: Zod (`zod/v4`), `drizzle-zod`
-- API codegen: Orval (from OpenAPI spec)
-- Build: esbuild (CJS bundle)
+- Frontend: React + Vite, Tailwind CSS v4, GSAP (with ScrollTrigger)
+- Icons: react-icons (FaGithub, FaLinkedin etc.), lucide-react
+- Routing: wouter
+- API: Express 5 (api-server, not used by portfolio)
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/portfolio/src/data/portfolio.json` — ALL content data (text, links, projects, tech stack, etc.)
+- `artifacts/portfolio/src/components/` — individual section components
+- `artifacts/portfolio/src/pages/Home.tsx` — main page composition
+- `artifacts/portfolio/src/index.css` — dark theme CSS variables + utility classes
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- All text/data lives in `portfolio.json` — never hardcoded in components
+- GSAP animations use `gsap.context()` for proper React cleanup
+- ScrollTrigger registered at component level (`gsap.registerPlugin(ScrollTrigger)`)
+- Hero adjective cycles with GSAP fade-in/out; gradient on "Frontend Developer" changes per phrase
+- Blob backgrounds use inline `style` radial-gradient for cross-browser compatibility
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+- Single-page dark portfolio with animated hero (cycling phrases via GSAP)
+- Sections: Home (hero), About Me, Tech Stack, Projects, Contact Me
+- Smooth scroll navigation, animated section entrances on scroll
+- Contact form with success state
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- Data stored in JSON files, not hardcoded in TSX
+- GSAP for all animations
+- Design matches screenshots: dark bg (#0a0a12), teal blob bottom-left, purple blob bottom-right
+- Adjective text is gray; "Frontend Developer" has changing gradient per phrase
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- GSAP `fromTo` overrides JSX opacity — use `from` for elements that should start visible
+- `ScrollTrigger` must be registered before use in each component
+- Google Fonts `@import url()` must be the very first line in index.css
 
 ## Pointers
 
-- See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details
+- See `pnpm-workspace` skill for workspace structure
+- GSAP docs: https://gsap.com/docs/v3/

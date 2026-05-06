@@ -1,0 +1,110 @@
+{
+  "brand": "mn.dev",
+  "hero": {
+    "rotatingPhrases": [
+      { "adjective": "A Fabulous", "gradientFrom": "#3b82f6", "gradientTo": "#a855f7" },
+      { "adjective": "An Extra", "gradientFrom": "#ec4899", "gradientTo": "#f97316" },
+      { "adjective": "An Amazing", "gradientFrom": "#f472b6", "gradientTo": "#ef4444" }
+    ],
+    "staticTitle": "Frontend Developer",
+    "greeting": "Hi 👋, My name is Md. Nuruzzaman, and I am a Frontend developer based in Dhaka, Bangladesh.",
+    "subtitle": "I specialize in building modern, responsive web applications.",
+    "cta": "View Projects",
+    "ctaLink": "#projects"
+  },
+  "socials": [
+    { "name": "GitHub", "icon": "FaGithub", "url": "https://github.com/" },
+    { "name": "LinkedIn", "icon": "FaLinkedin", "url": "https://linkedin.com/" },
+    { "name": "Facebook", "icon": "FaFacebook", "url": "https://facebook.com/" },
+    { "name": "Instagram", "icon": "FaInstagram", "url": "https://instagram.com/" },
+    { "name": "Discord", "icon": "FaDiscord", "url": "https://discord.com/" }
+  ],
+  "nav": [
+    { "label": "Home", "href": "#home" },
+    { "label": "About Me", "href": "#about" },
+    { "label": "Tech Stack", "href": "#techstack" },
+    { "label": "Projects", "href": "#projects" },
+    { "label": "Contact Me", "href": "#contact" }
+  ],
+  "about": {
+    "heading": "About Me",
+    "paragraphs": [
+      "I'm a passionate Frontend Developer with a keen eye for design and a love for creating seamless user experiences. Based in Dhaka, Bangladesh, I've been crafting web applications for over 3 years.",
+      "My journey into web development started with curiosity and has grown into a full-fledged career. I thrive on transforming complex problems into elegant, intuitive interfaces.",
+      "When I'm not coding, I enjoy exploring new technologies, contributing to open-source projects, and staying up-to-date with the latest trends in web development."
+    ],
+    "image": null
+  },
+  "techStack": {
+    "heading": "Tech Stack",
+    "subtitle": "Technologies I work with",
+    "categories": [
+      {
+        "name": "Frontend",
+        "skills": ["React", "Next.js", "TypeScript", "JavaScript", "HTML5", "CSS3"]
+      },
+      {
+        "name": "Styling",
+        "skills": ["Tailwind CSS", "SCSS", "Framer Motion", "GSAP"]
+      },
+      {
+        "name": "Tools",
+        "skills": ["Git", "GitHub", "VS Code", "Figma", "Vite", "Webpack"]
+      },
+      {
+        "name": "Backend",
+        "skills": ["Node.js", "Express", "REST APIs", "PostgreSQL"]
+      }
+    ]
+  },
+  "projects": {
+    "heading": "Projects",
+    "subtitle": "Some of my recent work",
+    "items": [
+      {
+        "id": 1,
+        "title": "Portfolio Website",
+        "description": "A personal portfolio built with Next.js, GSAP animations, and Tailwind CSS showcasing my work and skills.",
+        "tags": ["Next.js", "GSAP", "Tailwind"],
+        "liveUrl": "#",
+        "githubUrl": "#",
+        "gradient": "from-blue-500 to-purple-600"
+      },
+      {
+        "id": 2,
+        "title": "E-Commerce Dashboard",
+        "description": "A full-featured e-commerce admin panel with real-time analytics, inventory management, and order tracking.",
+        "tags": ["React", "TypeScript", "Recharts"],
+        "liveUrl": "#",
+        "githubUrl": "#",
+        "gradient": "from-pink-500 to-orange-500"
+      },
+      {
+        "id": 3,
+        "title": "Task Management App",
+        "description": "A Kanban-style task manager with drag-and-drop, real-time updates, and team collaboration features.",
+        "tags": ["React", "Node.js", "PostgreSQL"],
+        "liveUrl": "#",
+        "githubUrl": "#",
+        "gradient": "from-teal-400 to-blue-500"
+      },
+      {
+        "id": 4,
+        "title": "Weather Application",
+        "description": "A beautiful weather app with animated backgrounds, location detection, and 7-day forecasts.",
+        "tags": ["JavaScript", "OpenWeather API", "CSS3"],
+        "liveUrl": "#",
+        "githubUrl": "#",
+        "gradient": "from-purple-500 to-pink-500"
+      }
+    ]
+  },
+  "contact": {
+    "heading": "Contact Me",
+    "subtitle": "Let's work together",
+    "description": "I'm currently available for freelance work and full-time positions. If you have a project that needs some creative work, feel free to reach out.",
+    "email": "nuruzzaman@example.com",
+    "location": "Dhaka, Bangladesh",
+    "availability": "Available for new opportunities"
+  }
+}
