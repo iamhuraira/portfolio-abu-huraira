@@ -72,20 +72,33 @@ export default function HeroSection() {
   }, []);
 
   useEffect(() => {
+    if (adjectiveRef.current) {
+      gsap.set(adjectiveRef.current, { color: "#ffffff" });
+    }
+  }, []);
+
+  useEffect(() => {
     const interval = setInterval(() => {
       if (!adjectiveRef.current) return;
 
       gsap.to(adjectiveRef.current, {
         opacity: 0,
-        y: -12,
+        y: -14,
+        color: "#6b7280",
         duration: 0.3,
         ease: "power2.in",
         onComplete: () => {
           setCurrentIndex((prev) => (prev + 1) % phrases.length);
           gsap.fromTo(
             adjectiveRef.current,
-            { opacity: 0, y: 16 },
-            { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }
+            { opacity: 0, y: 20, color: "#6b7280" },
+            {
+              opacity: 1,
+              y: 0,
+              color: "#ffffff",
+              duration: 0.55,
+              ease: "back.out(2)",
+            }
           );
         },
       });
@@ -127,20 +140,14 @@ export default function HeroSection() {
         >
           <span
             ref={adjectiveRef}
-            className="block text-gray-500 mb-1"
+            className="block mb-1"
             data-testid="hero-adjective"
           >
             {phrases[currentIndex].adjective}
           </span>
           <span
             ref={developerRef}
-            className="block"
-            style={{
-              backgroundImage: "linear-gradient(135deg, #3b82f6, #a855f7)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
+            className="block hero-gradient-text"
             data-testid="hero-role"
           >
             {data.hero.staticTitle}
