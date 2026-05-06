@@ -8,11 +8,11 @@ import data from "@/data/portfolio.json";
 gsap.registerPlugin(ScrollTrigger);
 
 const socialIcons: Record<string, React.ReactNode> = {
-  GitHub: <FaGithub size={18} />,
-  LinkedIn: <FaLinkedin size={18} />,
-  Facebook: <FaFacebook size={18} />,
-  Instagram: <FaInstagram size={18} />,
-  Discord: <FaDiscord size={18} />,
+  GitHub: <FaGithub size={24} />,
+  LinkedIn: <FaLinkedin size={24} />,
+  Facebook: <FaFacebook size={24} />,
+  Instagram: <FaInstagram size={24} />,
+  Discord: <FaDiscord size={24} />,
 };
 
 export default function ContactSection() {
@@ -74,72 +74,68 @@ export default function ContactSection() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          <div ref={leftRef} className="space-y-5" data-testid="contact-info">
-            <div className="bg-[#0d0d1a] border border-white/10 rounded-xl p-6">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-9 h-9 rounded-lg bg-blue-500/15 border border-blue-500/20 flex items-center justify-center flex-shrink-0">
-                  <IdCard size={16} className="text-blue-400" />
+          <div ref={leftRef} className="space-y-8" data-testid="contact-info">
+            {/* Contact Information block */}
+            <div>
+              <div className="flex items-start gap-4 mb-6">
+                <div className="w-12 h-12 rounded-xl bg-blue-500/15 border border-blue-500/20 flex items-center justify-center flex-shrink-0">
+                  <IdCard size={20} className="text-blue-400" />
                 </div>
-                <div>
-                  <div className="text-blue-400 text-sm font-semibold">{data.contact.contactInfoLabel}</div>
-                  <div className="text-gray-500 text-xs">{data.contact.contactInfoSub}</div>
+                <div className="pt-0.5">
+                  <div className="text-blue-400 font-semibold text-base leading-tight">{data.contact.contactInfoLabel}</div>
+                  <div className="text-gray-400 text-sm mt-0.5">{data.contact.contactInfoSub}</div>
                 </div>
               </div>
 
-              <div className="space-y-4 mt-5">
-                <div className="flex items-start gap-3" data-testid="contact-email">
-                  <div className="w-8 h-8 rounded-md bg-blue-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Mail size={14} className="text-blue-400" />
-                  </div>
+              <div className="space-y-5 pl-2">
+                <div className="flex items-start gap-4" data-testid="contact-email">
+                  <Mail size={22} className="text-blue-400 flex-shrink-0 mt-0.5" />
                   <div>
-                    <div className="text-white text-sm font-medium">Email</div>
+                    <div className="text-white text-sm font-semibold">Email</div>
                     <a
                       href={`mailto:${data.contact.email}`}
-                      className="text-gray-400 text-xs hover:text-blue-400 transition-colors duration-200"
+                      className="text-gray-400 text-sm hover:text-blue-400 transition-colors duration-200"
                     >
                       {data.contact.email}
                     </a>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3" data-testid="contact-phone">
-                  <div className="w-8 h-8 rounded-md bg-blue-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Phone size={14} className="text-blue-400" />
-                  </div>
+                <div className="flex items-start gap-4" data-testid="contact-phone">
+                  <Phone size={22} className="text-blue-400 flex-shrink-0 mt-0.5" />
                   <div>
-                    <div className="text-white text-sm font-medium">Phone</div>
+                    <div className="text-white text-sm font-semibold">Phone</div>
                     <a
                       href={`tel:${data.contact.phone}`}
-                      className="text-gray-400 text-xs hover:text-blue-400 transition-colors duration-200"
+                      className="text-gray-400 text-sm hover:text-blue-400 transition-colors duration-200"
                     >
                       {data.contact.phone}
                     </a>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3" data-testid="contact-location">
-                  <div className="w-8 h-8 rounded-md bg-blue-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <MapPin size={14} className="text-blue-400" />
-                  </div>
+                <div className="flex items-start gap-4" data-testid="contact-location">
+                  <MapPin size={22} className="text-blue-400 flex-shrink-0 mt-0.5" />
                   <div>
-                    <div className="text-white text-sm font-medium">Location</div>
-                    <div className="text-gray-400 text-xs">{data.contact.location}</div>
+                    <div className="text-white text-sm font-semibold">Location</div>
+                    <div className="text-gray-400 text-sm">{data.contact.location}</div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="bg-[#0d0d1a] border border-white/10 rounded-xl p-6">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-9 h-9 rounded-lg bg-blue-500/15 border border-blue-500/20 flex items-center justify-center flex-shrink-0">
-                  <Link2 size={16} className="text-blue-400" />
+            {/* Connect with Me block */}
+            <div>
+              <div className="flex items-start gap-4 mb-5">
+                <div className="w-12 h-12 rounded-xl bg-blue-500/15 border border-blue-500/20 flex items-center justify-center flex-shrink-0">
+                  <Link2 size={20} className="text-blue-400" />
                 </div>
-                <div>
-                  <div className="text-blue-400 text-sm font-semibold">{data.contact.connectLabel}</div>
-                  <div className="text-gray-500 text-xs">{data.contact.connectSub}</div>
+                <div className="pt-0.5">
+                  <div className="text-blue-400 font-semibold text-base leading-tight">{data.contact.connectLabel}</div>
+                  <div className="text-gray-400 text-sm mt-0.5">{data.contact.connectSub}</div>
                 </div>
               </div>
-              <div className="flex items-center gap-4 mt-4">
+              <div className="flex items-center gap-5 pl-2">
                 {data.socials.map((social) => (
                   <a
                     key={social.name}
@@ -147,7 +143,7 @@ export default function ContactSection() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.name}
-                    className="text-gray-400 hover:text-white transition-colors duration-200"
+                    className="text-gray-300 hover:text-white transition-colors duration-200"
                   >
                     {socialIcons[social.name]}
                   </a>
