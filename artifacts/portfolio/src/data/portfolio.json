@@ -149,10 +149,13 @@
   },
   "contact": {
     "heading": "Contact Me",
-    "subtitle": "Let's work together",
-    "description": "I'm currently available for freelance work and full-time positions. If you have a project that needs some creative work, feel free to reach out.",
-    "email": "nuruzzaman@example.com",
-    "location": "Dhaka, Bangladesh",
-    "availability": "Available for new opportunities"
+    "subtitle": "I'm always happy to discuss opportunities, answer questions, or explore new ideas. Send a message or connect online.",
+    "email": "dev.mdnuruzzaman@gmail.com",
+    "phone": "+8801973875893",
+    "location": "Jatrabari, Dhaka, Bangladesh",
+    "contactInfoLabel": "Contact Information",
+    "contactInfoSub": "Reach me directly via email or phone for questions or collaborations.",
+    "connectLabel": "Connect with Me",
+    "connectSub": "Stay connected on social media for collaborations or updates."
   }
 }
