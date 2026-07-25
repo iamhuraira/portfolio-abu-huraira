@@ -1,0 +1,331 @@
+{
+  "brand": "Abu Huraira",
+  "hero": {
+    "rotatingPhrases": [
+      {
+        "adjective": "A Full-Stack",
+        "gradientFrom": "#3b82f6",
+        "gradientTo": "#a855f7"
+      },
+      {
+        "adjective": "An AI & SaaS",
+        "gradientFrom": "#ec4899",
+        "gradientTo": "#f97316"
+      },
+      {
+        "adjective": "A Product-Focused",
+        "gradientFrom": "#f472b6",
+        "gradientTo": "#ef4444"
+      }
+    ],
+    "staticTitle": "Software Developer",
+    "greeting": "Hi 👋, I'm Abu Huraira. I help startups and businesses build web apps and AI solutions from Lahore, Pakistan.",
+    "subtitle": "I build modern web apps and AI solutions. I specialize in SaaS platforms, AI applications, Office.js add-ins, Chrome extensions, and business systems with a focus on clean architecture and great user experience.",
+    "cta": "View Projects",
+    "ctaLink": "#projects"
+  },
+  "socials": [
+    {
+      "name": "GitHub",
+      "icon": "FaGithub",
+      "url": "https://github.com/iamhuraira"
+    },
+    {
+      "name": "LinkedIn",
+      "icon": "FaLinkedin",
+      "url": "https://linkedin.com/in/iamhuraira"
+    }
+  ],
+  "nav": [
+    { "label": "Home", "href": "#home" },
+    { "label": "About Me", "href": "#about" },
+    { "label": "Tech Stack", "href": "#techstack" },
+    { "label": "Projects", "href": "#projects" },
+    { "label": "Contact Me", "href": "#contact" }
+  ],
+  "about": {
+    "heading": "About Me",
+    "bio": "I'm Abu Huraira, a Full-Stack and AI Developer based in Lahore, Pakistan. Since 2022, I've been building modern SaaS platforms, AI applications, Office.js add-ins, Chrome extensions, and business systems using React, Next.js, Node.js, Ruby on Rails, Python, and cloud technologies. I enjoy turning ideas into production-ready products with clean architecture, fast performance, and intuitive user experiences. My experience spans SEO automation, FinTech, healthcare, education, and SMB software while working with startups, agencies, and international clients.",
+    "profile": {
+      "photo": "/profile.png",
+      "name": "Abu Huraira",
+      "tagline": "Full-Stack SaaS and AI Developer",
+      "resumeUrl": "#"
+    },
+    "education": [
+      {
+        "degree": "BS Software Engineering",
+        "institution": "Punjab University College of Information Technology (PUCIT)",
+        "period": "2019 - 2023"
+      }
+    ],
+    "experience": [
+      {
+        "role": "Full-Stack Developer",
+        "company": "AlphaScript",
+        "period": "Jan 2025 - Present"
+      },
+      {
+        "role": "Full-Stack SaaS and AI Developer",
+        "company": "Upwork",
+        "period": "2022 - Present"
+      },
+      {
+        "role": "Full-Stack Developer",
+        "company": "Slark Labs (Immerseo.io)",
+        "period": "Nov 2023 - Present"
+      },
+      {
+        "role": "Full-Stack Ruby on Rails Developer",
+        "company": "ClikDone / Menutize",
+        "period": "Jan 2024 - Aug 2024"
+      },
+      {
+        "role": "Software Engineering Intern",
+        "company": "Marham",
+        "period": "Aug 2023 - Oct 2023"
+      }
+    ]
+  },
+  "techStack": {
+    "heading": "Tech Stack",
+    "subtitle": "Technologies I work with",
+    "categories": [
+      {
+        "name": "Frontend",
+        "skills": [
+          "React",
+          "Next.js",
+          "TypeScript",
+          "JavaScript",
+          "Redux Toolkit",
+          "Zustand",
+          "Tailwind CSS",
+          "SCSS",
+          "MUI",
+          "Ant Design",
+          "Framer Motion",
+          "Anime.js"
+        ]
+      },
+      {
+        "name": "Backend",
+        "skills": [
+          "Node.js",
+          "Express.js",
+          "NestJS",
+          "Ruby on Rails",
+          "Python",
+          "FastAPI",
+          "PHP",
+          "REST API",
+          "GraphQL"
+        ]
+      },
+      {
+        "name": "Databases",
+        "skills": [
+          "MongoDB",
+          "PostgreSQL",
+          "MySQL",
+          "Redis"
+        ]
+      },
+      {
+        "name": "Cloud & DevOps",
+        "skills": [
+          "Docker",
+          "Nginx",
+          "DigitalOcean",
+          "Heroku",
+          "Vercel",
+          "Qovery",
+          "Netlify",
+          "CI/CD",
+          "AWS S3",
+          "Airflow",
+          "Bull Queue",
+          "RabbitMQ"
+        ]
+      },
+      {
+        "name": "Integrations",
+        "skills": [
+          "OpenAI",
+          "Stripe",
+          "WorkOS",
+          "Office.js",
+          "OAuth",
+          "Socket.IO",
+          "WordPress",
+          "HubSpot"
+        ]
+      },
+      {
+        "name": "Other",
+        "skills": [
+          "Chrome Extensions",
+          "PWA Development",
+          "Web Scraping",
+          "Playwright",
+          "BeautifulSoup",
+          "NLTK",
+          "AI Integrations"
+        ]
+      }
+    ]
+  },
+  "projects": {
+    "heading": "Projects",
+    "subtitle": "A selection of products and platforms I've built across SaaS, AI, FinTech, healthcare, and education.",
+    "items": [
+      {
+        "id": 1,
+        "title": "Immerseo.io",
+        "type": "AI SEO SaaS Platform",
+        "typeColor": "text-blue-400",
+        "description": "An AI-driven SEO platform that automates keyword research, content generation, publishing, and indexing. Built full-stack features including OpenAI workflows, Stripe billing, CMS publishing, and scalable backend services.",
+        "preview": "/immerSeo.png",
+        "techStack": [
+          { "name": "Next.js", "color": "#000000" },
+          { "name": "Node.js", "color": "#68A063" },
+          { "name": "MongoDB", "color": "#47A248" },
+          { "name": "Redis", "color": "#DC382D" },
+          { "name": "Python", "color": "#3776AB" },
+          { "name": "Stripe", "color": "#635BFF" }
+        ],
+        "githubUrl": "",
+        "liveUrl": "https://immerseo.io",
+        "videoUrl": ""
+      },
+      {
+        "id": 2,
+        "title": "ClikDone / Menutize",
+        "type": "SaaS Platform",
+        "typeColor": "text-green-400",
+        "description": "Website builder platform for SMBs with payments, referrals, ERP modules, and custom domains. Worked on Ruby on Rails backend, React frontend, Stripe Connect, and infrastructure migration.",
+        "preview": "/menutize.png",
+        "techStack": [
+          { "name": "Ruby on Rails", "color": "#CC0000" },
+          { "name": "React", "color": "#61DAFB" },
+          { "name": "PostgreSQL", "color": "#336791" },
+          { "name": "Docker", "color": "#2496ED" }
+        ],
+        "githubUrl": "",
+        "liveUrl": "https://www.menutize.ai/",
+        "videoUrl": ""
+      },
+      {
+        "id": 3,
+        "title": "AlphaScript",
+        "type": "FinTech Platform",
+        "typeColor": "text-purple-400",
+        "description": "Investment banking platform with Excel and PowerPoint add-ins that automate financial reports, charts, and presentations using Office.js, Redis, RabbitMQ, Airflow, and Node.js.",
+        "preview": "/alphascript.png",
+        "techStack": [
+          { "name": "React", "color": "#61DAFB" },
+          { "name": "Office.js", "color": "#D83B01" },
+          { "name": "Node.js", "color": "#68A063" },
+          { "name": "Redis", "color": "#DC382D" }
+        ],
+        "githubUrl": "",
+        "liveUrl": "",
+        "videoUrl": ""
+      },
+      {
+        "id": 4,
+        "title": "PharmaKhata",
+        "type": "Healthcare Platform",
+        "typeColor": "text-red-400",
+        "description": "Web and mobile solution for pharmaceutical order management, inventory, invoicing, and field sales. Includes Excel exports and real-time synchronization.",
+        "preview": "/Pharmakhata.png",
+        "techStack": [
+          { "name": "Next.js", "color": "#000000" },
+          { "name": "React Native", "color": "#61DAFB" },
+          { "name": "MongoDB", "color": "#47A248" }
+        ],
+        "githubUrl": "",
+        "liveUrl": "",
+        "videoUrl": ""
+      },
+      {
+        "id": 5,
+        "title": "DevLearn",
+        "type": "Education Platform",
+        "typeColor": "text-yellow-400",
+        "description": "A MERN-based eLearning platform featuring authentication, dashboards, course management, and an engaging learning experience.",
+        "preview": "/devlearn.png",
+        "techStack": [
+          { "name": "React", "color": "#61DAFB" },
+          { "name": "Node.js", "color": "#68A063" },
+          { "name": "MongoDB", "color": "#47A248" }
+        ],
+        "githubUrl": "",
+        "liveUrl": "https://devlearn-tau.vercel.app",
+        "videoUrl": ""
+      },
+      {
+        "id": 6,
+        "title": "Kurkey",
+        "type": "Landing Page",
+        "typeColor": "text-pink-400",
+        "description": "Bilingual landing page with a multi-step waitlist system, RTL support, backend integration, and conversion-focused design.",
+        "preview": "/kurkey.png",
+        "techStack": [
+          { "name": "HTML", "color": "#E34F26" },
+          { "name": "Tailwind CSS", "color": "#06B6D4" },
+          { "name": "JavaScript", "color": "#F7DF1E" }
+        ],
+        "githubUrl": "",
+        "liveUrl": "https://kurkey.vercel.app/",
+        "videoUrl": ""
+      },
+      {
+        "id": 7,
+        "title": "MacOS Portfolio",
+        "type": "Portfolio Website",
+        "typeColor": "text-orange-400",
+        "description": "Interactive MacOS-inspired developer portfolio built with Next.js featuring desktop-style navigation, animated windows, and responsive layouts.",
+        "preview": "/macosPortfolio.png",
+        "techStack": [
+          { "name": "Next.js", "color": "#000000" },
+          { "name": "Tailwind CSS", "color": "#06B6D4" },
+          { "name": "SCSS", "color": "#CC6699" }
+        ],
+        "githubUrl": "",
+        "liveUrl": "https://portfolio-website-sepia-nine.vercel.app/",
+        "videoUrl": ""
+      },
+      {
+        "id": 8,
+        "title": "Chrome Extensions",
+        "type": "Browser Extension",
+        "typeColor": "text-blue-400",
+        "description": "Built multiple Chrome extensions for productivity automation using Manifest V3, background workers, API integrations, and DOM manipulation.",
+        "preview": "/chromeextension.png",
+        "techStack": [
+          { "name": "JavaScript", "color": "#F7DF1E" },
+          { "name": "Chrome API", "color": "#4285F4" }
+        ],
+        "githubUrl": "",
+        "liveUrl": "",
+        "videoUrl": ""
+      }
+    ]
+  },
+  "contact": {
+    "heading": "Contact Me",
+    "subtitle": "I'm open to freelance projects, long-term collaborations, SaaS development, AI applications, Office.js add-ins, and startup product development.",
+    "email": "iamhuraira429@gmail.com",
+    "phone": "+92 308 6173323",
+    "location": "Lahore, Pakistan",
+    "contactInfoLabel": "Contact Information",
+    "contactInfoSub": "Feel free to reach out for your next project or collaboration.",
+    "connectLabel": "Connect with Me",
+    "connectSub": "Let's connect and build something amazing together."
+  },
+  "footer": {
+    "brand": "Abu Huraira",
+    "copyright": "© 2026 Abu Huraira. All rights reserved."
+  }
+}
