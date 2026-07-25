@@ -49,3 +49,7 @@ Thumbs.db
 .cache/
 .local/
 .canvas/
+
+# Environment
+.env
+.env.local

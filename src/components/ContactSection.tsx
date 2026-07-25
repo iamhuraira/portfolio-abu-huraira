@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Mail, Phone, MapPin, IdCard, Link2 } from "lucide-react";
@@ -23,6 +24,15 @@ export default function ContactSection() {
 
   const [formState, setFormState] = useState({ name: "", email: "", subject: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    if (publicKey) {
+      emailjs.init({ publicKey });
+    }
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -43,13 +53,57 @@ export default function ContactSection() {
     return () => ctx.revert();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
+    setError(null);
+
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    if (!serviceId || !templateId || !publicKey) {
+      setError("Contact form is not configured yet. Please email me directly.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      await emailjs.send(serviceId, templateId, {
+        from_name: formState.name,
+        from_email: formState.email,
+        user_name: formState.name,
+        user_email: formState.email,
+        name: formState.name,
+        email: formState.email,
+        reply_to: formState.email,
+        subject: formState.subject,
+        title: formState.subject,
+        message: formState.message,
+        to_email: data.contact.email,
+      });
+
+      setSubmitted(true);
       setFormState({ name: "", email: "", subject: "", message: "" });
-    }, 3000);
+      setTimeout(() => setSubmitted(false), 4000);
+    } catch (err) {
+      const detail =
+        err instanceof emailjs.EmailJSResponseStatus
+          ? err.text
+          : err instanceof Error
+            ? err.message
+            : null;
+
+      console.error("EmailJS error:", err);
+
+      setError(
+        import.meta.env.DEV && detail
+          ? `Failed to send: ${detail}`
+          : "Failed to send message. Please try again or email me directly.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -210,12 +264,18 @@ export default function ContactSection() {
                       data-testid="textarea-contact-message"
                     />
                   </div>
+                  {error && (
+                    <p className="text-red-400 text-sm text-center" data-testid="contact-error">
+                      {error}
+                    </p>
+                  )}
                   <button
                     type="submit"
-                    className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium text-sm py-3 rounded-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
+                    disabled={isSubmitting}
+                    className="w-full bg-blue-500 hover:bg-blue-600 disabled:bg-blue-500/60 disabled:cursor-not-allowed text-white font-medium text-sm py-3 rounded-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] disabled:hover:scale-100"
                     data-testid="btn-contact-submit"
                   >
-                    Send Message
+                    {isSubmitting ? "Sending..." : "Send Message"}
                   </button>
                 </form>
               )}
