@@ -66,11 +66,6 @@
         "period": "Jan 2025 - Present"
       },
       {
-        "role": "Full-Stack SaaS and AI Developer",
-        "company": "Upwork",
-        "period": "2022 - Present"
-      },
-      {
         "role": "Full-Stack Developer",
         "company": "Slark Labs (Immerseo.io)",
         "period": "Nov 2023 - Present"
@@ -185,6 +180,9 @@
         "type": "AI SEO SaaS Platform",
         "typeColor": "text-blue-400",
         "description": "An AI-driven SEO platform that automates keyword research, content generation, publishing, and indexing. Built full-stack features including OpenAI workflows, Stripe billing, CMS publishing, and scalable backend services.",
+        "overview": "Immerseo.io is a production AI SEO SaaS platform designed to help businesses automate their entire content workflow — from keyword discovery to publishing and search indexing. I contributed across the full stack, building AI-powered content pipelines, subscription billing, CMS integrations, and backend services that scale with user growth.",
+        "role": "Full-Stack Developer",
+        "year": "2024",
         "preview": "/immerSeo.png",
         "techStack": [
           { "name": "Next.js", "color": "#000000" },
@@ -194,6 +192,16 @@
           { "name": "Python", "color": "#3776AB" },
           { "name": "Stripe", "color": "#635BFF" }
         ],
+        "highlights": [
+          "AI-powered keyword research and content generation workflows",
+          "Stripe subscription billing and payment management",
+          "Automated CMS publishing and search indexing",
+          "Scalable backend with Redis caching and job queues"
+        ],
+        "gallery": [
+          { "src": "/immerSeo.png", "alt": "Immerseo platform dashboard" }
+        ],
+        "videos": [],
         "githubUrl": "",
         "liveUrl": "https://immerseo.io",
         "videoUrl": ""
@@ -204,6 +212,9 @@
         "type": "SaaS Platform",
         "typeColor": "text-green-400",
         "description": "Website builder platform for SMBs with payments, referrals, ERP modules, and custom domains. Worked on Ruby on Rails backend, React frontend, Stripe Connect, and infrastructure migration.",
+        "overview": "Menutize (formerly ClikDone) is a no-code website builder for small and medium businesses. The platform includes drag-and-drop site building, Stripe Connect payments, referral programs, ERP modules, and custom domain support. I worked on the Ruby on Rails API, React dashboard, payment flows, and cloud infrastructure migration.",
+        "role": "Full-Stack Developer",
+        "year": "2023 – 2024",
         "preview": "/menutize.png",
         "techStack": [
           { "name": "Ruby on Rails", "color": "#CC0000" },
@@ -211,6 +222,23 @@
           { "name": "PostgreSQL", "color": "#336791" },
           { "name": "Docker", "color": "#2496ED" }
         ],
+        "highlights": [
+          "No-code website builder with drag-and-drop editor",
+          "Stripe Connect for multi-vendor payments",
+          "Referral system and ERP module integrations",
+          "Docker-based infrastructure migration"
+        ],
+        "gallery": [
+          { "src": "/menutize.png", "alt": "Menutize homepage" },
+          { "src": "/mutaize/image.png", "alt": "Platform overview" },
+          { "src": "/mutaize/image (1).png", "alt": "Site builder interface" },
+          { "src": "/mutaize/image (2).png", "alt": "Dashboard analytics" },
+          { "src": "/mutaize/image (3).png", "alt": "Template selection" },
+          { "src": "/mutaize/image (4).png", "alt": "Page editor" },
+          { "src": "/mutaize/image (5).png", "alt": "Settings panel" },
+          { "src": "/mutaize/image (6).png", "alt": "Mobile preview" }
+        ],
+        "videos": [],
         "githubUrl": "",
         "liveUrl": "https://www.menutize.ai/",
         "videoUrl": ""
@@ -221,6 +249,9 @@
         "type": "FinTech Platform",
         "typeColor": "text-purple-400",
         "description": "Investment banking platform with Excel and PowerPoint add-ins that automate financial reports, charts, and presentations using Office.js, Redis, RabbitMQ, Airflow, and Node.js.",
+        "overview": "AlphaScript is an enterprise FinTech platform built for investment banking teams. It includes Excel and PowerPoint add-ins that automate financial report generation, chart creation, and presentation building. The system integrates Office.js on the frontend with a robust Node.js backend, message queues, and workflow orchestration via Airflow.",
+        "role": "Full-Stack Developer",
+        "year": "2023",
         "preview": "/alphascript.png",
         "techStack": [
           { "name": "React", "color": "#61DAFB" },
@@ -228,9 +259,24 @@
           { "name": "Node.js", "color": "#68A063" },
           { "name": "Redis", "color": "#DC382D" }
         ],
+        "highlights": [
+          "Excel & PowerPoint add-ins with Office.js",
+          "Automated financial report and chart generation",
+          "RabbitMQ message queuing for async processing",
+          "Airflow-powered workflow orchestration"
+        ],
+        "gallery": [
+          { "src": "/alphascript.png", "alt": "AlphaScript platform interface" }
+        ],
+        "videos": [
+          {
+            "url": "/alphascript/alphascript.mp4",
+            "title": "AlphaScript Platform Demo"
+          }
+        ],
         "githubUrl": "",
         "liveUrl": "",
-        "videoUrl": ""
+        "videoUrl": "/alphascript/alphascript.mp4"
       },
       {
         "id": 4,
@@ -238,12 +284,25 @@
         "type": "Healthcare Platform",
         "typeColor": "text-red-400",
         "description": "Web and mobile solution for pharmaceutical order management, inventory, invoicing, and field sales. Includes Excel exports and real-time synchronization.",
+        "overview": "PharmaKhata is a healthcare management platform for pharmaceutical distributors. It covers order management, inventory tracking, invoicing, field sales coordination, and real-time sync between web and mobile apps. Built for teams that need reliable offline-capable workflows and Excel-based reporting.",
+        "role": "Full-Stack Developer",
+        "year": "2023",
         "preview": "/Pharmakhata.png",
         "techStack": [
           { "name": "Next.js", "color": "#000000" },
           { "name": "React Native", "color": "#61DAFB" },
           { "name": "MongoDB", "color": "#47A248" }
         ],
+        "highlights": [
+          "Cross-platform web and mobile order management",
+          "Real-time inventory and invoice synchronization",
+          "Field sales tracking and reporting",
+          "Excel export for accounting workflows"
+        ],
+        "gallery": [
+          { "src": "/Pharmakhata.png", "alt": "PharmaKhata dashboard" }
+        ],
+        "videos": [],
         "githubUrl": "",
         "liveUrl": "",
         "videoUrl": ""
@@ -254,12 +313,26 @@
         "type": "Education Platform",
         "typeColor": "text-yellow-400",
         "description": "A MERN-based eLearning platform featuring authentication, dashboards, course management, and an engaging learning experience.",
+        "overview": "DevLearn is a full-featured eLearning platform built with the MERN stack. Students can browse courses, track progress, and learn through structured modules. Instructors manage content through dedicated dashboards with authentication, role-based access, and course analytics.",
+        "role": "Full-Stack Developer",
+        "year": "2023",
         "preview": "/devlearn.png",
         "techStack": [
           { "name": "React", "color": "#61DAFB" },
           { "name": "Node.js", "color": "#68A063" },
           { "name": "MongoDB", "color": "#47A248" }
         ],
+        "highlights": [
+          "JWT authentication with role-based access",
+          "Course creation and module management",
+          "Student progress tracking dashboards",
+          "Responsive UI for desktop and mobile"
+        ],
+        "gallery": [
+          { "src": "/devlearn.png", "alt": "DevLearn homepage" },
+          { "src": "/devlearn1.png", "alt": "Course dashboard" }
+        ],
+        "videos": [],
         "githubUrl": "",
         "liveUrl": "https://devlearn-tau.vercel.app",
         "videoUrl": ""
@@ -270,12 +343,33 @@
         "type": "Landing Page",
         "typeColor": "text-pink-400",
         "description": "Bilingual landing page with a multi-step waitlist system, RTL support, backend integration, and conversion-focused design.",
+        "overview": "Kurkey is a conversion-optimized bilingual landing page with full RTL (right-to-left) support for Arabic audiences. Features a multi-step waitlist funnel, backend API integration for lead capture, and a polished responsive design focused on maximizing sign-ups.",
+        "role": "Frontend Developer",
+        "year": "2024",
         "preview": "/kurkey.png",
         "techStack": [
           { "name": "HTML", "color": "#E34F26" },
           { "name": "Tailwind CSS", "color": "#06B6D4" },
           { "name": "JavaScript", "color": "#F7DF1E" }
         ],
+        "highlights": [
+          "Bilingual UI with full RTL layout support",
+          "Multi-step waitlist signup funnel",
+          "Backend API integration for lead capture",
+          "Conversion-focused responsive design"
+        ],
+        "gallery": [
+          { "src": "/kurkey.png", "alt": "Kurkey landing page hero" },
+          { "src": "/kurkey/kurkey.vercel.app_.png", "alt": "Kurkey homepage overview" },
+          { "src": "/kurkey/kurkey.vercel.app_ (1).png", "alt": "Kurkey landing section" },
+          { "src": "/kurkey/kurkey.vercel.app_ (2).png", "alt": "Kurkey features section" },
+          { "src": "/kurkey/kurkey.vercel.app_ (3).png", "alt": "Kurkey waitlist funnel" },
+          { "src": "/kurkey/kurkey.vercel.app_ (4).png", "alt": "Kurkey bilingual layout" },
+          { "src": "/kurkey/kurkey.vercel.app_ (5).png", "alt": "Kurkey RTL Arabic view" },
+          { "src": "/kurkey/kurkey.vercel.app_ (6).png", "alt": "Kurkey mobile responsive view" },
+          { "src": "/kurkey/kurkey.vercel.app_ (9).png", "alt": "Kurkey signup flow" }
+        ],
+        "videos": [],
         "githubUrl": "",
         "liveUrl": "https://kurkey.vercel.app/",
         "videoUrl": ""
@@ -286,12 +380,25 @@
         "type": "Portfolio Website",
         "typeColor": "text-orange-400",
         "description": "Interactive MacOS-inspired developer portfolio built with Next.js featuring desktop-style navigation, animated windows, and responsive layouts.",
+        "overview": "An interactive developer portfolio that mimics the macOS desktop experience. Users navigate through draggable windows, a dock, and animated transitions — all built with Next.js. The project showcases creative front-end skills with a unique, memorable user experience.",
+        "role": "Frontend Developer",
+        "year": "2024",
         "preview": "/macosPortfolio.png",
         "techStack": [
           { "name": "Next.js", "color": "#000000" },
           { "name": "Tailwind CSS", "color": "#06B6D4" },
           { "name": "SCSS", "color": "#CC6699" }
         ],
+        "highlights": [
+          "macOS-inspired desktop UI with draggable windows",
+          "Animated dock and window management",
+          "Fully responsive across all screen sizes",
+          "Built with Next.js and SCSS modules"
+        ],
+        "gallery": [
+          { "src": "/macosPortfolio.png", "alt": "MacOS portfolio desktop view" }
+        ],
+        "videos": [],
         "githubUrl": "",
         "liveUrl": "https://portfolio-website-sepia-nine.vercel.app/",
         "videoUrl": ""
@@ -302,11 +409,24 @@
         "type": "Browser Extension",
         "typeColor": "text-blue-400",
         "description": "Built multiple Chrome extensions for productivity automation using Manifest V3, background workers, API integrations, and DOM manipulation.",
+        "overview": "A collection of Chrome extensions built with Manifest V3 for productivity and workflow automation. Each extension uses service workers, content scripts, and Chrome APIs to integrate seamlessly with the browser and third-party services.",
+        "role": "Extension Developer",
+        "year": "2022 – 2024",
         "preview": "/chromeextension.png",
         "techStack": [
           { "name": "JavaScript", "color": "#F7DF1E" },
           { "name": "Chrome API", "color": "#4285F4" }
         ],
+        "highlights": [
+          "Manifest V3 architecture with service workers",
+          "Background sync and API integrations",
+          "DOM manipulation and content script injection",
+          "Chrome Web Store published extensions"
+        ],
+        "gallery": [
+          { "src": "/chromeextension.png", "alt": "Chrome extension showcase" }
+        ],
+        "videos": [],
         "githubUrl": "",
         "liveUrl": "",
         "videoUrl": ""
