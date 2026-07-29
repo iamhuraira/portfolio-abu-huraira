@@ -174,10 +174,10 @@ export default function ProjectDetail() {
       </div>
 
       {/* Main content */}
-      <main className="max-w-6xl mx-auto px-6 pb-24">
-        <div className="grid lg:grid-cols-3 gap-10">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 pb-16 sm:pb-24">
+        <div className="grid lg:grid-cols-3 gap-8 lg:gap-10">
           {/* Left column */}
-          <div className="lg:col-span-2 space-y-12">
+          <div className="lg:col-span-2 space-y-8 md:space-y-12 min-w-0">
             <section>
               <h2 className="text-xl font-bold text-white mb-4">Overview</h2>
               <div className="w-10 h-0.5 bg-blue-500 rounded-full mb-5" />
@@ -298,42 +298,52 @@ export default function ProjectDetail() {
         </div>
 
         {/* Prev / Next navigation */}
-        <div className="mt-16 pt-8 border-t border-white/10 grid sm:grid-cols-2 gap-4">
-          {prevProject ? (
+        <div
+          className={`mt-10 sm:mt-16 pt-6 sm:pt-8 border-t border-white/10 grid gap-3 sm:gap-4 ${
+            prevProject && nextProject ? "grid-cols-2" : "grid-cols-1"
+          }`}
+        >
+          {prevProject && (
             <Link
               href={`/projects/${prevProject.id}`}
-              className="group flex items-center gap-4 p-5 rounded-2xl border border-white/10 bg-[#0d0d1a] hover:border-white/20 hover:bg-white/[0.03] transition-all"
+              className="group flex items-center gap-2.5 sm:gap-4 p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border border-white/10 bg-[#0d0d1a] hover:border-blue-500/30 hover:bg-blue-500/[0.04] transition-all min-w-0 w-full touch-manipulation active:scale-[0.98]"
             >
-              <ArrowLeft
-                size={18}
-                className="text-gray-500 group-hover:text-white transition-colors flex-shrink-0"
-              />
-              <div className="min-w-0">
-                <p className="text-xs text-gray-500 mb-1">Previous Project</p>
-                <p className="text-sm font-medium text-white truncate group-hover:text-blue-400 transition-colors">
+              <span className="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-blue-500/30 group-hover:bg-blue-500/10 transition-colors">
+                <ArrowLeft
+                  size={15}
+                  className="text-gray-400 group-hover:text-blue-400 transition-colors"
+                />
+              </span>
+              <div className="min-w-0 flex-1">
+                <p className="text-[10px] sm:text-xs uppercase tracking-wide text-gray-500 mb-0.5">
+                  Previous
+                </p>
+                <p className="text-xs sm:text-sm font-medium text-white truncate group-hover:text-blue-400 transition-colors">
                   {prevProject.title}
                 </p>
               </div>
             </Link>
-          ) : (
-            <div />
           )}
 
           {nextProject && (
             <Link
               href={`/projects/${nextProject.id}`}
-              className="group flex items-center justify-end gap-4 p-5 rounded-2xl border border-white/10 bg-[#0d0d1a] hover:border-white/20 hover:bg-white/[0.03] transition-all sm:col-start-2"
+              className="group flex items-center gap-2.5 sm:gap-4 p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border border-white/10 bg-[#0d0d1a] hover:border-blue-500/30 hover:bg-blue-500/[0.04] transition-all min-w-0 w-full touch-manipulation active:scale-[0.98]"
             >
-              <div className="min-w-0 text-right">
-                <p className="text-xs text-gray-500 mb-1">Next Project</p>
-                <p className="text-sm font-medium text-white truncate group-hover:text-blue-400 transition-colors">
+              <div className="min-w-0 flex-1 text-right">
+                <p className="text-[10px] sm:text-xs uppercase tracking-wide text-gray-500 mb-0.5">
+                  Next
+                </p>
+                <p className="text-xs sm:text-sm font-medium text-white truncate group-hover:text-blue-400 transition-colors">
                   {nextProject.title}
                 </p>
               </div>
-              <ArrowRight
-                size={18}
-                className="text-gray-500 group-hover:text-white transition-colors flex-shrink-0"
-              />
+              <span className="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-blue-500/30 group-hover:bg-blue-500/10 transition-colors">
+                <ArrowRight
+                  size={15}
+                  className="text-gray-400 group-hover:text-blue-400 transition-colors"
+                />
+              </span>
             </Link>
           )}
         </div>
