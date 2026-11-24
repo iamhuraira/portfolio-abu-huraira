@@ -2,18 +2,20 @@ import { useEffect, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Mail, Phone, MapPin, IdCard, Link2 } from "lucide-react";
+import { Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
 import { FaGithub, FaLinkedin, FaFacebook, FaInstagram, FaDiscord } from "react-icons/fa";
 import data from "@/data/portfolio.json";
+import RevealText from "@/components/motion/RevealText";
+import { useMagnetic } from "@/lib/motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const socialIcons: Record<string, React.ReactNode> = {
   GitHub: <FaGithub size={24} />,
   LinkedIn: <FaLinkedin size={24} />,
-  Facebook: <FaFacebook size={24} />,
-  Instagram: <FaInstagram size={24} />,
-  Discord: <FaDiscord size={24} />,
+  Facebook: <FaFacebook size={16} />,
+  Instagram: <FaInstagram size={16} />,
+  Discord: <FaDiscord size={16} />,
 };
 
 export default function ContactSection() {
@@ -21,6 +23,8 @@ export default function ContactSection() {
   const headingRef = useRef<HTMLDivElement>(null);
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
+  const emailRef = useMagnetic<HTMLAnchorElement>(0.15);
+  const submitRef = useMagnetic<HTMLButtonElement>(0.25);
 
   const [formState, setFormState] = useState({ name: "", email: "", subject: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
@@ -106,176 +110,165 @@ export default function ContactSection() {
     }
   };
 
+  const field =
+    "w-full bg-transparent border-0 border-b border-line-strong px-0 py-3 text-base text-ink placeholder:text-subtle focus:outline-none focus:border-accent transition-colors duration-200";
+  const label = "block text-subtle text-xs font-semibold uppercase tracking-[0.2em]";
+
   return (
     <section
       id="contact"
       ref={sectionRef}
-      className="relative py-24 px-6"
+      className="relative overflow-hidden py-24 md:py-32 px-6 md:px-12"
       data-testid="contact-section"
     >
-      <div className="max-w-6xl mx-auto">
-        <div ref={headingRef} className="mb-12">
-          <h2
-            className="text-4xl md:text-5xl font-bold text-white mb-1"
-            data-testid="contact-heading"
-          >
+      <div
+        className="pointer-events-none absolute -bottom-60 left-1/2 h-[700px] w-[900px] -translate-x-1/2"
+        style={{ background: "radial-gradient(circle at center, rgba(59,130,246,0.14) 0%, transparent 65%)" }}
+        aria-hidden="true"
+      />
+      <div className="relative max-w-6xl mx-auto">
+        <div ref={headingRef} className="mb-16">
+          <p className="text-accent-ink text-xs md:text-sm font-semibold uppercase tracking-[0.25em] mb-5" data-testid="contact-heading">
             {data.contact.heading}
-          </h2>
-          <div className="w-14 h-1 bg-blue-500 mb-5 rounded-full" />
-         
+          </p>
+          <RevealText
+            as="h2"
+            text="Let's build something together."
+            className="font-display font-bold text-5xl md:text-7xl lg:text-8xl tracking-tight leading-[0.95] text-ink max-w-4xl"
+          />
+          <p className="text-muted text-base md:text-lg max-w-2xl leading-relaxed mt-8">{data.contact.subtitle}</p>
+          <a
+            ref={emailRef}
+            href={`mailto:${data.contact.email}`}
+            className="group mt-10 inline-flex items-center gap-3 font-display text-xl sm:text-2xl md:text-4xl font-medium text-ink"
+            data-testid="contact-email-big"
+          >
+            <span className="relative">
+              {data.contact.email}
+              <span className="absolute -bottom-1 left-0 h-[2px] w-full origin-left scale-x-0 bg-accent transition-transform duration-500 group-hover:scale-x-100" />
+            </span>
+            <ArrowUpRight className="h-7 w-7 md:h-9 md:w-9 shrink-0 text-accent-ink transition-transform duration-300 group-hover:rotate-45" />
+          </a>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          
-          <div ref={leftRef} className="space-y-8" data-testid="contact-info">
-          <p className="text-gray-400 text-sm max-w-lg leading-relaxed">
-            {data.contact.subtitle}
-          </p>
-            {/* Contact Information block */}
-            <div>
-              <div className="flex items-start gap-4 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-blue-500/15 border border-blue-500/20 flex items-center justify-center flex-shrink-0">
-                  <IdCard size={20} className="text-blue-400" />
-                </div>
-                <div className="pt-0.5">
-                  <div className="text-blue-400 font-semibold text-base leading-tight">{data.contact.contactInfoLabel}</div>
-                  <div className="text-gray-400 text-sm mt-0.5">{data.contact.contactInfoSub}</div>
-                </div>
-              </div>
-
-              <div className="space-y-5 pl-2">
-                <div className="flex items-start gap-4" data-testid="contact-email">
-                  <Mail size={22} className="text-blue-400 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <div className="text-white text-sm font-semibold">Email</div>
-                    <a
-                      href={`mailto:${data.contact.email}`}
-                      className="text-gray-400 text-sm hover:text-blue-400 transition-colors duration-200"
-                    >
-                      {data.contact.email}
+        <div className="grid gap-12 md:grid-cols-[1fr_1.3fr] md:gap-16">
+          <div ref={leftRef} data-testid="contact-info">
+            <p className={`${label} mb-2`}>{data.contact.contactInfoLabel}</p>
+            <ul className="mb-12">
+              {[
+                { icon: Mail, name: "Email", value: data.contact.email, href: `mailto:${data.contact.email}`, id: "contact-email" },
+                { icon: Phone, name: "Phone", value: data.contact.phone, href: `tel:${data.contact.phone}`, id: "contact-phone" },
+                { icon: MapPin, name: "Location", value: data.contact.location, href: null, id: "contact-location" },
+              ].map(({ icon: Icon, name, value, href, id }) => (
+                <li key={name} className="flex items-center gap-4 border-b border-line py-4" data-testid={id}>
+                  <Icon size={18} className="text-accent-ink shrink-0" />
+                  <span className="text-subtle text-sm w-20 shrink-0">{name}</span>
+                  {href ? (
+                    <a href={href} className="text-ink text-sm md:text-base hover:text-accent-ink transition-colors break-all">
+                      {value}
                     </a>
-                  </div>
-                </div>
+                  ) : (
+                    <span className="text-ink text-sm md:text-base">{value}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
 
-                <div className="flex items-start gap-4" data-testid="contact-phone">
-                  <Phone size={22} className="text-blue-400 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <div className="text-white text-sm font-semibold">Phone</div>
-                    <a
-                      href={`tel:${data.contact.phone}`}
-                      className="text-gray-400 text-sm hover:text-blue-400 transition-colors duration-200"
-                    >
-                      {data.contact.phone}
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4" data-testid="contact-location">
-                  <MapPin size={22} className="text-blue-400 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <div className="text-white text-sm font-semibold">Location</div>
-                    <div className="text-gray-400 text-sm">{data.contact.location}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Connect with Me block */}
-            <div>
-              <div className="flex items-start gap-4 mb-5">
-                <div className="w-12 h-12 rounded-xl bg-blue-500/15 border border-blue-500/20 flex items-center justify-center flex-shrink-0">
-                  <Link2 size={20} className="text-blue-400" />
-                </div>
-                <div className="pt-0.5">
-                  <div className="text-blue-400 font-semibold text-base leading-tight">{data.contact.connectLabel}</div>
-                  <div className="text-gray-400 text-sm mt-0.5">{data.contact.connectSub}</div>
-                </div>
-              </div>
-              <div className="flex items-center gap-5 pl-2">
-                {data.socials.map((social) => (
-                  <a
-                    key={social.name}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.name}
-                    className="text-gray-300 hover:text-white transition-colors duration-200"
-                  >
-                    {socialIcons[social.name]}
-                  </a>
-                ))}
-              </div>
+            <p className={`${label} mb-4`}>{data.contact.connectLabel}</p>
+            <div className="flex flex-wrap gap-3">
+              {data.socials.map((social) => (
+                <a
+                  key={social.name}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.name}
+                  className="group inline-flex items-center gap-2 rounded-full border border-line px-5 py-2.5 text-sm text-ink/85 hover:border-accent/60 hover:text-ink transition-colors"
+                >
+                  {socialIcons[social.name]}
+                  {social.name}
+                  <ArrowUpRight size={14} className="transition-transform group-hover:rotate-45" />
+                </a>
+              ))}
             </div>
           </div>
 
           <div ref={rightRef}>
-            <div className="bg-[#0d0d1a] border border-white/10 rounded-xl p-6 h-full">
+            <div className="rounded-3xl border border-line bg-soft p-6 md:p-10 h-full">
               {submitted ? (
-                <div className="flex items-center justify-center h-full text-green-400 text-sm text-center py-8" data-testid="contact-success">
+                <div className="flex items-center justify-center h-full text-green-400 text-base text-center py-16" data-testid="contact-success">
                   Message sent! I'll get back to you soon.
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4" data-testid="contact-form">
-                  <div>
-                    <label className="block text-white text-sm mb-1.5">Name</label>
-                    <input
-                      type="text"
-                      placeholder="Enter your name"
-                      value={formState.name}
-                      onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                      required
-                      className="w-full bg-[#0a0a12] border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-blue-500/60 transition-colors duration-200"
-                      data-testid="input-contact-name"
-                    />
+                <form onSubmit={handleSubmit} className="space-y-8" data-testid="contact-form">
+                  <div className="grid gap-8 md:grid-cols-2">
+                    <div>
+                      <label htmlFor="cf-name" className={label}>Name</label>
+                      <input
+                        id="cf-name"
+                        type="text"
+                        placeholder="Your name"
+                        value={formState.name}
+                        onChange={(e) => setFormState({ ...formState, name: e.target.value })}
+                        required
+                        className={field}
+                        data-testid="input-contact-name"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="cf-email" className={label}>Email</label>
+                      <input
+                        id="cf-email"
+                        type="email"
+                        placeholder="you@company.com"
+                        value={formState.email}
+                        onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+                        required
+                        className={field}
+                        data-testid="input-contact-email"
+                      />
+                    </div>
                   </div>
                   <div>
-                    <label className="block text-white text-sm mb-1.5">Email</label>
+                    <label htmlFor="cf-subject" className={label}>Subject</label>
                     <input
-                      type="email"
-                      placeholder="Enter your email"
-                      value={formState.email}
-                      onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                      required
-                      className="w-full bg-[#0a0a12] border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-blue-500/60 transition-colors duration-200"
-                      data-testid="input-contact-email"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-white text-sm mb-1.5">Subject</label>
-                    <input
+                      id="cf-subject"
                       type="text"
-                      placeholder="Enter subject"
+                      placeholder="What's it about?"
                       value={formState.subject}
                       onChange={(e) => setFormState({ ...formState, subject: e.target.value })}
                       required
-                      className="w-full bg-[#0a0a12] border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-blue-500/60 transition-colors duration-200"
+                      className={field}
                       data-testid="input-contact-subject"
                     />
                   </div>
                   <div>
-                    <label className="block text-white text-sm mb-1.5">Message</label>
+                    <label htmlFor="cf-message" className={label}>Message</label>
                     <textarea
-                      rows={5}
-                      placeholder="Enter your message"
+                      id="cf-message"
+                      rows={4}
+                      placeholder="Tell me about your project"
                       value={formState.message}
                       onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                       required
-                      className="w-full bg-[#0a0a12] border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-blue-500/60 transition-colors duration-200 resize-none"
+                      className={`${field} resize-none`}
                       data-testid="textarea-contact-message"
                     />
                   </div>
                   {error && (
-                    <p className="text-red-400 text-sm text-center" data-testid="contact-error">
+                    <p className="text-red-400 text-sm" data-testid="contact-error">
                       {error}
                     </p>
                   )}
                   <button
+                    ref={submitRef}
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-blue-500 hover:bg-blue-600 disabled:bg-blue-500/60 disabled:cursor-not-allowed text-white font-medium text-sm py-3 rounded-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] disabled:hover:scale-100"
+                    className="group inline-flex items-center gap-2 rounded-full bg-accent hover:bg-accent-hover disabled:bg-accent/60 disabled:cursor-not-allowed px-8 py-3.5 text-sm font-medium text-white transition-colors"
                     data-testid="btn-contact-submit"
                   >
                     {isSubmitting ? "Sending..." : "Send Message"}
+                    <ArrowUpRight size={16} className="transition-transform group-hover:rotate-45" />
                   </button>
                 </form>
               )}

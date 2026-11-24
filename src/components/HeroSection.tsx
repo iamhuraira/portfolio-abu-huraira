@@ -1,8 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowDownRight, ArrowUpRight, Gamepad2 } from "lucide-react";
+import { Link } from "wouter";
 import { FaGithub, FaLinkedin, FaFacebook, FaInstagram, FaDiscord } from "react-icons/fa";
-import ScrollIndicator from "@/components/ScrollIndicator";
+import RevealText from "@/components/motion/RevealText";
+import HeroShapes from "@/components/motion/HeroShapes";
 import data from "@/data/portfolio.json";
+import { scrollToTarget } from "@/lib/smoothScroll";
+import { useMagnetic } from "@/lib/motion";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
   FaGithub,
@@ -14,96 +22,46 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; className?: s
 
 export default function HeroSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const adjectiveRef = useRef<HTMLSpanElement>(null);
-  const developerRef = useRef<HTMLSpanElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
-  const blobTealRef = useRef<HTMLDivElement>(null);
-  const blobPurpleRef = useRef<HTMLDivElement>(null);
+  const nameRef = useRef<HTMLDivElement>(null);
+  const adjectiveRef = useRef<HTMLSpanElement>(null);
+  const primaryBtn = useMagnetic<HTMLAnchorElement>();
+  const secondaryBtn = useMagnetic<HTMLAnchorElement>();
 
   const phrases = data.hero.rotatingPhrases;
+  const [firstName, ...rest] = data.brand.split(" ");
+  const lastName = rest.join(" ");
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ delay: 0.2 });
-      tl.fromTo(
-        adjectiveRef.current,
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
-      )
-        .fromTo(
-          developerRef.current,
-          { y: 40, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
-          "-=0.5"
-        )
-        .from(
-          subtitleRef.current,
-          { y: 20, duration: 0.7, ease: "power3.out" },
-          "-=0.4"
-        )
-        .from(
-          ctaRef.current,
-          { y: 20, duration: 0.7, ease: "power3.out" },
-          "-=0.35"
-        );
-
-      gsap.to(blobTealRef.current, {
-        x: 30,
-        y: -20,
-        duration: 7,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
+      gsap.from(".hero-fade", { y: 24, opacity: 0, duration: 0.9, ease: "power3.out", stagger: 0.1, delay: 0.9 });
+      // the name drifts down and fades as you scroll past the hero
+      gsap.to(nameRef.current, {
+        yPercent: 30,
+        opacity: 0.25,
+        ease: "none",
+        scrollTrigger: { trigger: sectionRef.current, start: "top top", end: "bottom top", scrub: true },
       });
-
-      gsap.to(blobPurpleRef.current, {
-        x: -25,
-        y: 25,
-        duration: 9,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
+      gsap.to(".hero-blob", { x: 40, y: -30, duration: 8, repeat: -1, yoyo: true, ease: "sine.inOut", stagger: 1.5 });
     }, sectionRef);
-
     return () => ctx.revert();
   }, []);
 
   useEffect(() => {
-    if (adjectiveRef.current) {
-      gsap.set(adjectiveRef.current, { color: "#ffffff" });
-    }
-  }, []);
-
-  useEffect(() => {
     const interval = setInterval(() => {
-      if (!adjectiveRef.current) return;
-
-      gsap.to(adjectiveRef.current, {
+      const el = adjectiveRef.current;
+      if (!el) return;
+      gsap.to(el, {
+        yPercent: -100,
         opacity: 0,
-        y: -14,
-        color: "#6b7280",
-        duration: 0.3,
+        duration: 0.35,
         ease: "power2.in",
         onComplete: () => {
           setCurrentIndex((prev) => (prev + 1) % phrases.length);
-          gsap.fromTo(
-            adjectiveRef.current,
-            { opacity: 0, y: 20, color: "#6b7280" },
-            {
-              opacity: 1,
-              y: 0,
-              color: "#ffffff",
-              duration: 0.55,
-              ease: "back.out(2)",
-            }
-          );
+          gsap.fromTo(el, { yPercent: 100, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.55, ease: "power3.out" });
         },
       });
-    }, 4500);
-
+    }, 3500);
     return () => clearInterval(interval);
   }, [phrases.length]);
 
@@ -111,103 +69,130 @@ export default function HeroSection() {
     <section
       id="home"
       ref={sectionRef}
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-end overflow-hidden pt-28 pb-14 px-6 md:px-12"
       data-testid="hero-section"
     >
+      <div className="hero-grid absolute inset-0 pointer-events-none" aria-hidden="true" />
+      <HeroShapes />
       <div
-        ref={blobTealRef}
-        className="absolute bottom-0 left-0 w-[700px] h-[700px] pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle at center, rgba(20,184,166,0.15) 0%, transparent 70%)",
-        }}
+        className="hero-blob absolute -bottom-40 -left-40 w-[700px] h-[700px] pointer-events-none"
+        style={{ background: "radial-gradient(circle at center, var(--c-glow-a) 0%, transparent 70%)" }}
         aria-hidden="true"
       />
       <div
-        ref={blobPurpleRef}
-        className="absolute bottom-0 right-0 w-[700px] h-[700px] pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle at center, rgba(139,92,246,0.15) 0%, transparent 70%)",
-        }}
+        className="hero-blob absolute -top-20 -right-40 w-[760px] h-[760px] pointer-events-none"
+        style={{ background: "radial-gradient(circle at center, var(--c-glow-b) 0%, transparent 70%)" }}
         aria-hidden="true"
       />
 
-      <div className="relative z-10 text-center px-4 max-w-3xl mx-auto flex flex-col items-center">
-        <h1
-          className="text-5xl md:text-6xl font-bold leading-snug mb-5"
-          data-testid="hero-title"
-        >
-          <span
-            ref={adjectiveRef}
-            className="block mb-1"
-            data-testid="hero-adjective"
-          >
-            {phrases[currentIndex].adjective}
+      <div className="relative z-10 max-w-7xl w-full mx-auto">
+        <div className="hero-fade flex flex-wrap items-center gap-3 mb-8 text-xs md:text-sm text-muted">
+          <span className="inline-flex items-center gap-2 rounded-full border border-line bg-soft px-3 py-1.5">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+            </span>
+            Available for new projects
           </span>
-          <span
-            ref={developerRef}
-            className="block hero-gradient-text"
-            data-testid="hero-role"
+          <span>{data.contact.location}</span>
+          <Link
+            href="/world"
+            className="inline-flex items-center gap-1.5 rounded-full border border-accent/40 bg-accent-soft px-3 py-1.5 text-accent-ink hover:bg-accent hover:text-white transition-colors"
+            data-testid="link-world"
           >
-            {data.hero.staticTitle}
-          </span>
+            <Gamepad2 size={14} /> Explore my 3D world
+          </Link>
+        </div>
+
+        <h1 className="sr-only">
+          {data.brand} — {phrases[0].adjective} {data.hero.staticTitle}
         </h1>
+        <div ref={nameRef} aria-hidden="true" className="font-display font-bold uppercase leading-[0.86] tracking-[-0.04em]">
+          <RevealText
+            as="div"
+            by="char"
+            onScroll={false}
+            delay={0.15}
+            text={firstName}
+            className="text-[clamp(4.2rem,16vw,14rem)] text-ink"
+          />
+          <RevealText
+            as="div"
+            by="char"
+            onScroll={false}
+            delay={0.4}
+            text={lastName}
+            className="text-[clamp(4.2rem,16vw,14rem)] text-outline md:pl-[12vw]"
+          />
+        </div>
 
-        <p
-          ref={subtitleRef}
-          className="text-gray-400 text-sm md:text-base leading-relaxed mb-8 max-w-lg mx-auto"
-          style={{ opacity: 1 }}
-          data-testid="hero-bio"
-        >
-          {data.hero.greeting}
-          <br />
-          {data.hero.subtitle}
-        </p>
+        <div className="mt-10 md:mt-14 grid gap-10 md:grid-cols-[1fr_auto] md:items-end">
+          <div className="max-w-xl">
+            <p className="hero-fade text-xl md:text-2xl font-display font-medium text-ink mb-4" data-testid="hero-title">
+              <span className="inline-flex overflow-hidden align-bottom">
+                <span ref={adjectiveRef} className="inline-block" data-testid="hero-adjective">
+                  {phrases[currentIndex].adjective}
+                </span>
+              </span>{" "}
+              <span className="hero-gradient-text" data-testid="hero-role">
+                {data.hero.staticTitle}
+              </span>
+            </p>
+            <p className="hero-fade text-muted text-sm md:text-base leading-relaxed" data-testid="hero-bio">
+              {data.hero.greeting}
+            </p>
+          </div>
 
-        <div
-          ref={ctaRef}
-          className="flex items-center justify-center gap-6 flex-wrap"
-          style={{ opacity: 1 }}
-          data-testid="hero-cta-group"
-        >
-          <a
-            href={data.hero.ctaLink}
-            onClick={(e) => {
-              e.preventDefault();
-              document.querySelector(data.hero.ctaLink)?.scrollIntoView({ behavior: "smooth" });
-            }}
-            className="px-6 py-2.5 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded text-sm transition-all duration-200 hover:scale-105 active:scale-95"
-            data-testid="btn-view-projects"
-          >
-            {data.hero.cta}
-          </a>
-
-          <span className="w-px h-6 bg-gray-700" aria-hidden="true" />
-
-          <div className="flex items-center gap-4" data-testid="hero-socials">
-            {data.socials.map((social) => {
-              const Icon = iconMap[social.icon];
-              if (!Icon) return null;
-              return (
-                <a
-                  key={social.name}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.name}
-                  className="text-gray-400 hover:text-white transition-colors duration-200 hover:scale-110 transform"
-                  data-testid={`social-link-${social.name.toLowerCase()}`}
-                >
-                  <Icon size={18} />
-                </a>
-              );
-            })}
+          <div className="hero-fade flex flex-col items-start md:items-end gap-6" data-testid="hero-cta-group">
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                ref={primaryBtn}
+                href={data.hero.ctaLink}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToTarget(data.hero.ctaLink);
+                }}
+                className="group inline-flex items-center gap-2 rounded-full bg-accent hover:bg-accent-hover px-6 py-3 text-sm font-medium text-white transition-colors"
+                data-testid="btn-view-projects"
+              >
+                {data.hero.cta}
+                <ArrowDownRight size={16} className="transition-transform group-hover:rotate-[-45deg]" />
+              </a>
+              <a
+                ref={secondaryBtn}
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToTarget("#contact");
+                }}
+                className="group inline-flex items-center gap-2 rounded-full border border-line-strong hover:border-ink/40 px-6 py-3 text-sm font-medium text-ink transition-colors"
+              >
+                Let's talk
+                <ArrowUpRight size={16} className="transition-transform group-hover:rotate-45" />
+              </a>
+            </div>
+            <div className="flex items-center gap-4" data-testid="hero-socials">
+              {data.socials.map((social) => {
+                const Icon = iconMap[social.icon];
+                if (!Icon) return null;
+                return (
+                  <a
+                    key={social.name}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.name}
+                    className="text-muted hover:text-ink transition-colors"
+                    data-testid={`social-link-${social.name.toLowerCase()}`}
+                  >
+                    <Icon size={18} />
+                  </a>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
-
-      <ScrollIndicator />
     </section>
   );
 }

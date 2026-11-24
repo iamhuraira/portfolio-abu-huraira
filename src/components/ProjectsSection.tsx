@@ -5,7 +5,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaGithub } from "react-icons/fa";
 import { ExternalLink, FileText, Play } from "lucide-react";
 import data from "@/data/portfolio.json";
+import { typeColor } from "@/lib/typeColor";
 import { isValidUrl } from "@/lib/urls";
+import { useMediaQuery } from "@/lib/motion";
+import RevealText from "@/components/motion/RevealText";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,52 +16,84 @@ export default function ProjectsSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
+  const pinRef = useRef<HTMLDivElement>(null);
+  // sideways scroll only where a full card row fits on screen
+  const horizontal = useMediaQuery("(min-width: 1024px) and (min-height: 720px)");
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(headingRef.current, {
-        y: 40,
-        duration: 0.8,
-        ease: "power3.out",
-        scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
-      });
+      if (!horizontal) {
+        gsap.from(gridRef.current?.children ?? [], {
+          y: 60,
+          opacity: 0,
+          duration: 0.7,
+          stagger: 0.1,
+          ease: "power3.out",
+          clearProps: "transform,opacity",
+          scrollTrigger: { trigger: gridRef.current, start: "top 85%" },
+        });
+      }
 
-      gsap.from(gridRef.current?.children ?? [], {
-        y: 60,
-        duration: 0.7,
-        stagger: 0.15,
-        ease: "power3.out",
-        scrollTrigger: { trigger: sectionRef.current, start: "top 72%" },
-      });
+      // in sideways mode the sliding track is the reveal
+      if (horizontal && gridRef.current && pinRef.current) {
+        const track = gridRef.current;
+        const distance = () => Math.max(0, track.scrollWidth - window.innerWidth);
+        gsap.to(track, {
+          x: () => -distance(),
+          ease: "none",
+          scrollTrigger: {
+            trigger: pinRef.current,
+            start: "top top",
+            end: () => `+=${distance()}`,
+            pin: true,
+            scrub: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+      }
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [horizontal]);
 
   return (
     <section
       id="projects"
       ref={sectionRef}
-      className="relative py-24 px-6"
+      className={`relative ${horizontal ? "" : "py-24 px-6"}`}
       data-testid="projects-section"
     >
-      <div className="max-w-6xl mx-auto">
-        <div ref={headingRef} className="mb-12">
-          <h2
-            className="text-4xl md:text-5xl font-bold text-white mb-1"
-            data-testid="projects-heading"
-          >
-            {data.projects.heading}
-          </h2>
-          <div className="w-14 h-1 bg-blue-500 mb-5 rounded-full" />
-          <p className="text-gray-400 text-sm max-w-lg leading-relaxed">
+      <div
+        ref={pinRef}
+        className={horizontal ? "h-screen flex flex-col justify-center overflow-hidden" : "max-w-6xl mx-auto"}
+      >
+        <div
+          ref={headingRef}
+          className={`mb-10 flex flex-col md:flex-row md:items-end md:justify-between gap-4 ${
+            horizontal ? "w-full max-w-6xl mx-auto px-6" : ""
+          }`}
+        >
+          <div>
+            <p className="text-accent-ink text-xs md:text-sm font-semibold uppercase tracking-[0.25em] mb-5">Selected work</p>
+            <RevealText
+              as="h2"
+              text={data.projects.heading}
+              className="font-display font-bold text-4xl md:text-6xl tracking-tight text-ink"
+            />
+          </div>
+          <p className="text-muted text-sm max-w-md leading-relaxed">
             {data.projects.subtitle}
+            {horizontal && <span className="block text-subtle mt-2">Keep scrolling →</span>}
           </p>
         </div>
 
         <div
           ref={gridRef}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          className={
+            horizontal
+              ? "flex gap-6 w-max px-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))] items-stretch"
+              : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          }
           data-testid="projects-grid"
         >
           {data.projects.items.map((project) => {
@@ -69,38 +104,41 @@ export default function ProjectsSection() {
             return (
               <div
                 key={project.id}
-                className="flex flex-col bg-[#0d0d1a] border border-white/10 rounded-xl overflow-hidden hover:border-white/20 transition-all duration-300 group"
+                data-cursor
+                className={`flex flex-col bg-surface border border-line rounded-2xl overflow-hidden hover:border-accent/40 hover:-translate-y-1 transition-[border-color,translate] duration-300 group ${
+                  horizontal ? "w-[400px] shrink-0" : ""
+                }`}
                 data-testid={`project-card-${project.id}`}
               >
-                <div className="relative overflow-hidden" style={{ height: "180px" }}>
+                <div className="skew-scroll relative overflow-hidden" style={{ height: "180px" }}>
                   <img
                     src={project.preview}
                     alt={project.title}
-                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-110"
                   />
                 </div>
 
                 <div className="flex flex-col flex-1 p-5">
                   <div className="mb-3">
-                    <span className="text-white font-bold text-lg mr-2">
+                    <span className="text-ink font-bold text-lg mr-2">
                       {project.title}
                     </span>
-                    <span className={`text-xs font-medium ${project.typeColor}`}>
+                    <span className={`text-xs font-medium ${typeColor(project.typeColor)}`}>
                       ({project.type})
                     </span>
                   </div>
 
-                  <p className="text-gray-400 text-sm leading-relaxed mb-4">
+                  <p className="text-muted text-sm leading-relaxed mb-4">
                     {project.description}
                   </p>
 
                   <div className="mb-5">
-                    <p className="text-gray-400 text-xs mb-2 font-medium">Tech stack:</p>
+                    <p className="text-muted text-xs mb-2 font-medium">Tech stack:</p>
                     <div className="flex flex-wrap gap-2">
                       {project.techStack.map((tech) => (
                         <span
                           key={tech.name}
-                          className="flex items-center gap-1.5 text-xs text-gray-300 bg-white/5 border border-white/10 rounded-md px-2 py-1"
+                          className="flex items-center gap-1.5 text-xs text-ink/75 bg-soft border border-line rounded-md px-2 py-1"
                         >
                           <span
                             className="inline-block w-2 h-2 rounded-full flex-shrink-0"
@@ -112,10 +150,10 @@ export default function ProjectsSection() {
                     </div>
                   </div>
 
-                  <div className="mt-auto flex flex-wrap gap-2 pt-4 border-t border-white/10">
+                  <div className="mt-auto flex flex-wrap gap-2 pt-4 border-t border-line">
                     <Link
                       href={`/projects/${project.id}`}
-                      className="flex items-center gap-1.5 text-xs text-blue-400 border border-blue-500/40 rounded-md px-3 py-1.5 hover:bg-blue-500/10 transition-colors duration-200"
+                      className="flex items-center gap-1.5 text-xs text-accent-ink border border-accent/40 rounded-md px-3 py-1.5 hover:bg-accent-soft transition-colors duration-200"
                     >
                       <FileText size={11} />
                       Details
@@ -127,7 +165,7 @@ export default function ProjectsSection() {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 text-xs text-blue-400 border border-blue-500/40 rounded-md px-3 py-1.5 hover:bg-blue-500/10 transition-colors duration-200"
+                        className="flex items-center gap-1.5 text-xs text-accent-ink border border-accent/40 rounded-md px-3 py-1.5 hover:bg-accent-soft transition-colors duration-200"
                       >
                         <FaGithub size={12} />
                         GitHub
@@ -140,7 +178,7 @@ export default function ProjectsSection() {
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 text-xs text-blue-400 border border-blue-500/40 rounded-md px-3 py-1.5 hover:bg-blue-500/10 transition-colors duration-200"
+                        className="flex items-center gap-1.5 text-xs text-accent-ink border border-accent/40 rounded-md px-3 py-1.5 hover:bg-accent-soft transition-colors duration-200"
                       >
                         <ExternalLink size={11} />
                         Live Site
@@ -153,7 +191,7 @@ export default function ProjectsSection() {
                         href={project.videoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 text-xs text-blue-400 border border-blue-500/40 rounded-md px-3 py-1.5 hover:bg-blue-500/10 transition-colors duration-200"
+                        className="flex items-center gap-1.5 text-xs text-accent-ink border border-accent/40 rounded-md px-3 py-1.5 hover:bg-accent-soft transition-colors duration-200"
                       >
                         <Play size={11} />
                         Video

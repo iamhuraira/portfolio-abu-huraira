@@ -39,6 +39,7 @@
   "nav": [
     { "label": "Home", "href": "#home" },
     { "label": "About Me", "href": "#about" },
+    { "label": "Services", "href": "#services" },
     { "label": "Tech Stack", "href": "#techstack" },
     { "label": "Projects", "href": "#projects" },
     { "label": "Contact Me", "href": "#contact" }
@@ -80,6 +81,38 @@
         "company": "Marham",
         "period": "Aug 2023 - Oct 2023"
       }
+    ]
+  },
+  "statement": {
+    "eyebrow": "What I do",
+    "text": "I turn ideas into production-ready products: SaaS platforms, AI applications and business systems that are fast, clean and built to grow with your business.",
+    "stats": [
+      { "value": 4, "suffix": "+", "label": "Years building" },
+      { "value": 8, "suffix": "+", "label": "Products shipped" },
+      { "value": 4, "suffix": "", "label": "Teams worked with" },
+      { "value": 5, "suffix": "+", "label": "Industries" }
+    ]
+  },
+  "services": {
+    "eyebrow": "Services",
+    "heading": "How I can help your business",
+    "items": [
+      { "icon": "Layers", "title": "SaaS Platforms", "description": "End-to-end SaaS products with auth, subscriptions and Stripe billing, dashboards and multi-tenant architecture." },
+      { "icon": "Sparkles", "title": "AI Applications", "description": "LLM-powered features, AI content generation and SEO automation with OpenAI and custom data pipelines." },
+      { "icon": "FileSpreadsheet", "title": "Office.js Add-ins", "description": "Excel, Word and PowerPoint add-ins that automate financial models, reports and repetitive office work." },
+      { "icon": "Puzzle", "title": "Chrome Extensions", "description": "Manifest V3 extensions for productivity, web scraping and workflow automation, built for real teams." },
+      { "icon": "Building2", "title": "Business Systems", "description": "ERP modules, inventory, invoicing and order management for SMBs, healthcare and education." },
+      { "icon": "Plug", "title": "APIs & Integrations", "description": "Node.js, Rails and Python backends with Stripe, HubSpot, OAuth, queues and real-time features." }
+    ]
+  },
+  "process": {
+    "eyebrow": "How I work",
+    "heading": "From idea to launch, step by step",
+    "steps": [
+      { "title": "Discuss your idea", "description": "We talk through your idea, your users and your goals, then agree on scope, timeline and budget." },
+      { "title": "Plan & design", "description": "I map out the architecture and design the key screens, so you see the product before any code is written." },
+      { "title": "Build", "description": "Clean, tested code with regular demos, so you can follow progress and give feedback early." },
+      { "title": "Launch & support", "description": "I deploy, monitor and keep improving it after launch, so your product keeps growing." }
     ]
   },
   "techStack": {

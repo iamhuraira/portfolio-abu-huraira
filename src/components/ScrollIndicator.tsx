@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { scrollToTarget } from "@/lib/smoothScroll";
 
 export default function ScrollIndicator() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -67,10 +68,7 @@ export default function ScrollIndicator() {
   }, []);
 
   const handleClick = () => {
-    const aboutSection = document.querySelector("#about");
-    if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: "smooth" });
-    }
+    scrollToTarget("#about");
   };
 
   return (
