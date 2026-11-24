@@ -1,154 +1,132 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FileText, GraduationCap, Briefcase, Download } from "lucide-react";
+import { Download } from "lucide-react";
+import RevealText from "@/components/motion/RevealText";
 import data from "@/data/portfolio.json";
+import { useMagnetic } from "@/lib/motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
-  const leftRef = useRef<HTMLDivElement>(null);
-  const rightRef = useRef<HTMLDivElement>(null);
+  const resumeBtn = useMagnetic<HTMLAnchorElement>(0.25);
+  const { about } = data;
 
   useEffect(() => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
     const ctx = gsap.context(() => {
-      gsap.from(headingRef.current, {
-        y: 40,
+      // photo uncovers from the bottom up
+      gsap.fromTo(
+        ".about-photo",
+        { clipPath: "inset(100% 0% 0% 0%)" },
+        {
+          clipPath: "inset(0% 0% 0% 0%)",
+          duration: 1.3,
+          ease: "power4.inOut",
+          scrollTrigger: { trigger: ".about-photo", start: "top 80%" },
+        }
+      );
+      gsap.from(".about-photo img", {
+        scale: 1.3,
+        duration: 1.6,
+        ease: "power3.out",
+        scrollTrigger: { trigger: ".about-photo", start: "top 80%" },
+      });
+      gsap.from(".about-fade", {
+        y: 30,
+        opacity: 0,
         duration: 0.8,
         ease: "power3.out",
-        scrollTrigger: { trigger: sectionRef.current, start: "top 85%" },
-      });
-
-      gsap.from(leftRef.current, {
-        x: -40,
-        duration: 0.9,
-        ease: "power3.out",
-        scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
-      });
-
-      gsap.from(rightRef.current, {
-        x: 40,
-        duration: 0.9,
-        ease: "power3.out",
-        scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
+        stagger: 0.08,
+        clearProps: "transform,opacity",
+        scrollTrigger: { trigger: ".about-body", start: "top 80%" },
       });
     }, sectionRef);
-
     return () => ctx.revert();
   }, []);
 
-  const { about } = data;
+  const rows = [
+    ...about.experience.map((e) => ({ title: e.role, sub: e.company, period: e.period, kind: "Experience" })),
+    ...about.education.map((e) => ({ title: e.degree, sub: e.institution, period: e.period, kind: "Education" })),
+  ];
 
   return (
-    <section
-      id="about"
-      ref={sectionRef}
-      className="relative py-24 px-6 md:px-12"
-      data-testid="about-section"
-    >
-      <div className="max-w-6xl mx-auto">
-        <h2
-          ref={headingRef}
-          className="text-3xl md:text-4xl font-bold text-white mb-2"
-          data-testid="about-heading"
-        >
-          {about.heading}
-        </h2>
-        <div className="w-14 h-[3px] bg-blue-500 rounded-full mb-10" />
-
-        <div className="grid lg:grid-cols-[1fr_280px] gap-12 items-start">
-          <div ref={leftRef} className="space-y-8" data-testid="about-left">
-
-            <div data-testid="about-bio-block">
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-8 h-8 rounded-md bg-blue-500/15 border border-blue-500/30 flex items-center justify-center flex-shrink-0">
-                  <FileText size={14} className="text-blue-400" />
-                </div>
-                <span className="text-blue-400 font-semibold text-sm">Bio</span>
-              </div>
-              <p className="text-gray-400 text-sm leading-relaxed pl-1" data-testid="about-bio-text">
-                {about.bio}
-              </p>
-            </div>
-
-            <div className="grid sm:grid-cols-2 gap-8">
-              <div data-testid="about-education-block">
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="w-8 h-8 rounded-md bg-blue-500/15 border border-blue-500/30 flex items-center justify-center flex-shrink-0">
-                    <GraduationCap size={14} className="text-blue-400" />
-                  </div>
-                  <span className="text-blue-400 font-semibold text-sm">Education</span>
-                </div>
-                <div className="space-y-5 pl-1">
-                  {about.education.map((edu, i) => (
-                    <div key={i} data-testid={`education-item-${i}`}>
-                      <p className="text-white text-sm font-semibold leading-snug">{edu.degree}</p>
-                      <p className="text-gray-400 text-xs mt-1">{edu.institution}</p>
-                      <p className="text-gray-500 text-xs mt-0.5">{edu.period}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div data-testid="about-experience-block">
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="w-8 h-8 rounded-md bg-blue-500/15 border border-blue-500/30 flex items-center justify-center flex-shrink-0">
-                    <Briefcase size={14} className="text-blue-400" />
-                  </div>
-                  <span className="text-blue-400 font-semibold text-sm">Experience</span>
-                </div>
-                <div className="space-y-5 pl-1">
-                  {about.experience.map((exp, i) => (
-                    <div key={i} data-testid={`experience-item-${i}`}>
-                      <p className="text-white text-sm font-semibold leading-snug">{exp.role}</p>
-                      <p className="text-gray-400 text-xs mt-1">{exp.company}</p>
-                      <p className="text-gray-500 text-xs mt-0.5">{exp.period}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div
-            ref={rightRef}
-            className="flex flex-col items-center text-center gap-4"
-            data-testid="about-profile"
-          >
-            <div className="relative">
-              <div className="w-44 h-44 rounded-full overflow-hidden border-2 border-blue-500/40 ring-4 ring-blue-500/10">
-                <img
-                  src={about.profile.photo}
-                  alt={about.profile.name}
-                  className="w-full h-full object-cover object-top"
-                  data-testid="about-profile-photo"
-                />
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-white font-bold text-lg" data-testid="about-profile-name">
+    <section id="about" ref={sectionRef} className="relative py-24 md:py-32 px-6 md:px-12" data-testid="about-section">
+      <div className="max-w-6xl mx-auto grid gap-14 lg:grid-cols-[340px_1fr] lg:gap-20">
+        {/* profile card */}
+        <div className="lg:sticky lg:top-28 self-start" data-testid="about-profile">
+          <div className="about-photo group relative aspect-[4/5] overflow-hidden rounded-3xl border border-line bg-soft">
+            <img
+              src={about.profile.photo}
+              alt={about.profile.name}
+              className="h-full w-full object-cover object-top grayscale transition-[filter,transform] duration-700 group-hover:grayscale-0 group-hover:scale-105"
+              data-testid="about-profile-photo"
+            />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-page via-page/70 to-transparent p-6 pt-20">
+              <h3 className="font-display text-2xl font-semibold text-ink" data-testid="about-profile-name">
                 {about.profile.name}
               </h3>
-              <p
-                className="text-gray-400 text-xs leading-relaxed mt-1 max-w-[220px]"
-                data-testid="about-profile-tagline"
-              >
+              <p className="text-ink/75 text-sm mt-1" data-testid="about-profile-tagline">
                 {about.profile.tagline}
               </p>
             </div>
+          </div>
+          <a
+            ref={resumeBtn}
+            href={about.profile.resumeUrl}
+            download
+            className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
+            data-testid="btn-download-resume"
+          >
+            <Download size={15} />
+            Download Resume
+          </a>
+        </div>
 
-            <a
-              href={about.profile.resumeUrl}
-              download
-              className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-5 py-2.5 rounded-lg transition-all duration-200 hover:scale-105 active:scale-95 mt-1"
-              data-testid="btn-download-resume"
-            >
-              <Download size={14} />
-              Download Resume
-            </a>
+        {/* story + timeline */}
+        <div className="about-body">
+          <p className="text-accent-ink text-xs md:text-sm font-semibold uppercase tracking-[0.25em] mb-5">About me</p>
+          <RevealText
+            as="h2"
+            text={about.heading}
+            className="font-display font-bold text-4xl md:text-6xl tracking-tight text-ink mb-8"
+          />
+          <p className="about-fade text-ink/75 text-base md:text-lg leading-relaxed" data-testid="about-bio-text">
+            {about.bio}
+          </p>
+
+          <div className="mt-14">
+            {(["Experience", "Education"] as const).map((kind) => (
+              <div key={kind} className="mb-10 last:mb-0" data-testid={`about-${kind.toLowerCase()}-block`}>
+                <p className="about-fade text-subtle text-xs font-semibold uppercase tracking-[0.25em] mb-3">{kind}</p>
+                <ul>
+                  {rows
+                    .filter((r) => r.kind === kind)
+                    .map((r, i) => (
+                      <li
+                        key={i}
+                        data-cursor
+                        className="about-fade group grid grid-cols-[1fr_auto] items-baseline gap-x-6 gap-y-1 border-t border-line py-5 last:border-b transition-colors hover:border-accent/40"
+                        data-testid={`${kind.toLowerCase()}-item-${i}`}
+                      >
+                        <div>
+                          <p className="font-display text-lg md:text-xl font-medium text-ink transition-transform duration-300 group-hover:translate-x-2">
+                            {r.title}
+                          </p>
+                          <p className="text-muted text-sm mt-1 transition-transform duration-300 group-hover:translate-x-2">
+                            {r.sub}
+                          </p>
+                        </div>
+                        <span className="text-subtle text-xs md:text-sm whitespace-nowrap tabular-nums group-hover:text-accent-ink transition-colors">
+                          {r.period}
+                        </span>
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
       </div>
